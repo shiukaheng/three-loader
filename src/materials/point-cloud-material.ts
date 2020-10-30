@@ -14,6 +14,7 @@ import {
   Texture,
   Vector3,
   WebGLRenderer,
+  Clock
 } from 'three';
 import {
   DEFAULT_MAX_POINT_SIZE,
@@ -87,6 +88,7 @@ export interface IPointCloudMaterialUniforms {
   wSourceID: IUniform<number>;
   opacityAttenuation: IUniform<number>;
   filterByNormalThreshold: IUniform<number>;
+  timePassed: IUniform<number>;
 }
 
 const TREE_TYPE_DEFS = {
@@ -142,12 +144,15 @@ export class PointCloudMaterial extends RawShaderMaterial {
   fog = false;
   numClipBoxes: number = 0;
   clipBoxes: IClipBox[] = [];
+  clock: Clock;
+  
   visibleNodesTexture: Texture | undefined;
   private visibleNodeTextureOffsets = new Map<string, number>();
 
   private _gradient = SPECTRAL;
   private gradientTexture: Texture | undefined = generateGradientTexture(this._gradient);
 
+  
   private _classification: IClassification = DEFAULT_CLASSIFICATION;
   private classificationTexture: Texture | undefined = generateClassificationTexture(
     this._classification,
@@ -198,6 +203,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
     wSourceID: makeUniform('f', 0),
     opacityAttenuation: makeUniform('f', 1),
     filterByNormalThreshold: makeUniform('f', 0),
+    timePassed: makeUniform('f', 0)
   };
 
   @uniform('bbSize') bbSize!: [number, number, number];
@@ -230,6 +236,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
   @uniform('wSourceID') weightSourceID!: number;
   @uniform('opacityAttenuation') opacityAttenuation!: number;
   @uniform('filterByNormalThreshold') filterByNormalThreshold!: number;
+  @uniform('timePassed') timePassed!: number;
 
   @requiresShaderUpdate() useClipBox: boolean = false;
   @requiresShaderUpdate() weighted: boolean = false;
@@ -274,6 +281,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
     this.defaultAttributeValues.indices = [0, 0, 0, 0];
 
     this.vertexColors = true;
+
+    this.clock = new Clock();
 
     this.updateShaderSource();
   }
@@ -521,6 +530,8 @@ export class PointCloudMaterial extends RawShaderMaterial {
     ) {
       this.updateVisibilityTextureData(visibleNodes);
     }
+    this.setUniform('timePassed', this.clock.getElapsedTime());
+    // console.log("Update!")
   }
 
   private updateVisibilityTextureData(nodes: PointCloudOctreeNode[]) {
