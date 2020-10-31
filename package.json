@@ -1,15 +1,14 @@
 {
-  "name": "three-loader-fx",
-  "private": false,
+  "name": "@shiukaheng/three-loader-fx",
   "version": "0.2.2",
   "description": "Potree loader for ThreeJS, converted and adapted to Typescript.",
   "contributors": [
-    "Shiu Ka Heng <shiukaheng@gmail.com",
+    "Shiu Ka Heng",
     "Hugo Campos <hugo.campos@pix4d.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/shiukaheng/three-loader.git"
+    "url": "git+https://github.com/shiukaheng/three-loader.git"
   },
   "bugs": {
     "url": "https://github.com/shiukaheng/three-loader/issues"
@@ -75,5 +74,8 @@
     "photogrammetry"
   ],
   "homepage": "https://github.com/shiukaheng/three-loader#readme",
-  "author": ""
+  "author": "",
+  "directories": {
+    "example": "example"
+  }
 }
