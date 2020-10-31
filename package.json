@@ -1,17 +1,18 @@
 {
-  "name": "@pnext/three-loader",
+  "name": "three-loader-fx",
   "private": false,
   "version": "0.2.2",
   "description": "Potree loader for ThreeJS, converted and adapted to Typescript.",
   "contributors": [
+    "Shiu Ka Heng <shiukaheng@gmail.com",
     "Hugo Campos <hugo.campos@pix4d.com>"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pnext/three-loader.git"
+    "url": "https://github.com/shiukaheng/three-loader.git"
   },
   "bugs": {
-    "url": "https://github.com/pnext/three-loader/issues"
+    "url": "https://github.com/shiukaheng/three-loader/issues"
   },
   "license": "MIT",
   "main": "build/potree.js",
@@ -73,6 +74,6 @@
     "gis",
     "photogrammetry"
   ],
-  "homepage": "https://github.com/pnext/three-loader#readme",
+  "homepage": "https://github.com/shiukaheng/three-loader#readme",
   "author": ""
 }

@@ -1,5 +1,6 @@
 # README
 
+Note: Forked from [@pnext/three-loader](https://github.com/pnext/three-loader)
 This project is based on the core/loading parts of [Potree](http://potree.org/), converted to Typescript for usage directly in ThreeJS-based third-party applications.
 
 This project focuses solely on the loading of point clouds into ThreeJS applications and doesn't try to provide other things which are available in Potree: earth controls, measurement tools, elevation profiles, etc.
