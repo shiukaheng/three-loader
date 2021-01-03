@@ -26,6 +26,10 @@ unloadBtn.addEventListener('click', () => {
   pointCloud = undefined;
 });
 
+declare global {
+  interface Window {pco: any;}
+}
+
 const loadBtn = document.createElement('button');
 loadBtn.textContent = 'Load';
 loadBtn.addEventListener('click', () => {
@@ -38,12 +42,18 @@ loadBtn.addEventListener('click', () => {
   viewer
     .load(
       'cloud.js',
-      'https://raw.githubusercontent.com/potree/potree/develop/pointclouds/lion_takanawa/',
+      'https://tlmhk.synology.me/data/BigShotIntensity/',
     )
     .then(pco => {
       pointCloud = pco;
       pointCloud.rotateX(-Math.PI / 2);
       pointCloud.material.size = 1.0;
+      pointCloud.material.pointSizeType = 1;
+      pco.position.z += 25
+      pco.position.y -= 8
+      pco.rotation.x = -1.2
+      console.log(pco)
+      window.pco = pco || {};
 
       const camera = viewer.camera;
       camera.far = 1000;
